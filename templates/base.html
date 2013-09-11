@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>LazyGunner's BattleStar</title>
+        <link href="http://bootswatch.com/cosmo/bootstrap.min.css" rel="stylesheet">
+        <style>.content {padding-top: 80px;}</style>
+    </head>
+
+    <body>
+        
+        {%- block topbar -%}
+        <div class="topbar">
+            <div class="fill">
+                <div class="container">
+                    <h2>
+                        <a href="/" class="brand">LazyGunner's BattleStar</a>
+                    </h2>
+                 </div>
+             </div>
+         </div>
+         {%- endblock -%}
+
+         <div class="container">
+            <div class="content">
+                {% block page_header %}{% endblock %}
+                {% block content %}{% endblock %}
+            </div>
+         </div>
+         {% block js_footer %}{% endblock%}
+     </body>
+</html>
+
