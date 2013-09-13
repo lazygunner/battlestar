@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
-from battlestar.models import Post, Comment
+from models import Post, Comment
 
 posts = Blueprint('posts', __name__, template_folder='templates')
 
