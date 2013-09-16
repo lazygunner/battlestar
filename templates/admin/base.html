@@ -1,19 +1,17 @@
 {% extends "base.html" %}
 
 {%- block topbar -%}
-<div class="topbar" data-dropdown="dropdown">
-  <div class = "fill">
+<div class="navbar navbar-inverse" data-dropdown="dropdown">
     <div class="container">
         <h2>
-            <a href="{{ url_for('admin.index') }}" class="brand">Bridge</a>
+            <a href="{{ url_for('admin.index') }}" class="navbar-brand">Bridge</a>
         </h2>
-        <ul class="nav-secondary-nav">
+        <ul class="nav navbar-nav navbar-right">
           <li class="menu">
-            <a href="{{ url_for("admin.create") }}" class="btn-primary">Create</a>
+            <a href="{{ url_for("admin.create") }}" class="">Create</a>
           </li>
         </ul>
     </div>
-  </div>
 
 </div>
 {%- endblock -%}
