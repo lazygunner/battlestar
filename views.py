@@ -32,7 +32,9 @@ class DetailView(MethodView):
     def post(self, slug):
         context = self.get_context(slug)
         form = context.get('form')
-
+        
+        for i in form:
+            print i
         if form.validate():
             comment = Comment()
             form.populate_obj(comment)
@@ -41,7 +43,7 @@ class DetailView(MethodView):
             post.comments.append(comment)
             post.save()
 
-            return redirect(url_for('post.detail', slug=slug))
+            return redirect(url_for('posts.detail', slug=slug))
         return render_template('posts/detail.html', **context)
 
 posts.add_url_rule('/', view_func=ListView.as_view('list'))
