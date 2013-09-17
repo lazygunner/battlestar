@@ -27,7 +27,11 @@
                 {% block content %}{% endblock %}
             </div>
          </div>
-         {% block js_footer %}{% endblock%}
+         {% block js_footer %}
+         <script src="{{ url_for('static', filename='js/epiceditor.min.js') }}"></script>
+         <script src="{{ url_for('static', filename='js/battlestar.js') }}"></script>
+
+         {% endblock%}
      </body>
 </html>
 
