@@ -33,8 +33,6 @@ class DetailView(MethodView):
         context = self.get_context(slug)
         form = context.get('form')
         
-        for i in form:
-            print i
         if form.validate():
             comment = Comment()
             form.populate_obj(comment)
