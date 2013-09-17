@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>LazyGunner's BattleStar</title>
         <link href="http://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet">
+        <link href="{{ url_for('static', filename='js/google-code-prettify/prettify.css')}}" rel="stylesheet">
         <style>.content {padding-top: 80px;}</style>
     </head>
 
@@ -30,7 +31,7 @@
          {% block js_footer %}
          <script src="{{ url_for('static', filename='js/epiceditor.min.js') }}"></script>
          <script src="{{ url_for('static', filename='js/battlestar.js') }}"></script>
-
+         <script src="{{ url_for('static', filename='js/google-code-prettify/prettify.js') }}"></script>
          {% endblock%}
      </body>
 </html>

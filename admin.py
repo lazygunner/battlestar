@@ -6,7 +6,7 @@ from flask.ext.mongoengine.wtf import model_form
 from auth import requires_auth
 from models import Post, Comment
 
-admin = Blueprint('admin', __name__, template_folder='templates')
+admin = Blueprint('bridge', __name__, template_folder='templates')
 
 class List(MethodView):
     decorators = [requires_auth]
@@ -14,7 +14,7 @@ class List(MethodView):
 
     def get(self):
         posts = self.cls.objects.all()
-        return render_template('admin/list.html', posts=posts)
+        return render_template('bridge/list.html', posts=posts)
 
 class Detail(MethodView):
     decorateors = [requires_auth]
@@ -42,7 +42,7 @@ class Detail(MethodView):
 
     def get(self, slug):
         context = self.get_context(slug)
-        return render_template('admin/detail.html', **context)
+        return render_template('bridge/detail.html', **context)
 
     def post(self, slug):
         context = self.get_context(slug)
@@ -53,9 +53,9 @@ class Detail(MethodView):
             form.populate_obj(post)
             post.save()
 
-            return redirect(url_for('admin.index'))
-        return render_template('admin/detail.html', **context)
+            return redirect(url_for('bridge.index'))
+        return render_template('bridge/detail.html', **context)
 
-admin.add_url_rule('/admin/', view_func=List.as_view('index'))
-admin.add_url_rule('/admin/create/', defaults={'slug': None}, view_func=Detail.as_view('create'))
-admin.add_url_rule('/admin/<slug>/', view_func=Detail.as_view('edit'))
+admin.add_url_rule('/bridge/', view_func=List.as_view('index'))
+admin.add_url_rule('/bridge/create/', defaults={'slug': None}, view_func=Detail.as_view('create'))
+admin.add_url_rule('/bridge/<slug>/', view_func=Detail.as_view('edit'))

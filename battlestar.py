@@ -11,9 +11,9 @@ md = Markdown(app)
 
 def register_blueprints(app):
     from views import posts
-    from admin import admin
+    from bridge import bridge
     app.register_blueprint(posts)
-    app.register_blueprint(admin)
+    app.register_blueprint(bridge)
 
 register_blueprints(app)
 app.debug=True

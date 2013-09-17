@@ -7,27 +7,33 @@ window.onload = function(){
 
             // Prettify JS
         var scriptTag = previewer.createElement('script');
-        scriptTag.src = 'google-code-prettify/prettify.js';
+        scriptTag.src = '/static/js/google-code-prettify/prettify.js';
 
             // Prettify CSS
         var cssTag = previewer.createElement('link');
         cssTag.rel = 'stylesheet';
         cssTag.type = 'text/css';
-        cssTag.href = 'google-code-prettify/prettify.css';
+        cssTag.href = '/static/js/google-code-prettify/prettify.css';
            // Add JS / CSS
         previewer.body.appendChild(scriptTag);
         previewer.head.appendChild(cssTag);
     
     });
+
     editor.on('preview', function() {
         // Add necessary classes to <code> elements
         var previewerBody = previewer.body;
         var codeBlocks = previewerBody.getElementsByTagName('code');
 
         for (var i = 0; i < codeBlocks.length; i++)
-            codeBlocks[i].className += ' prettyprint';
-
-        prettyPrint(null, previewerBody);
+            codeBlocks[i].className += ' prettyprint linenums';
+            
+        prettyPrint(null, previewerBody);	
+        
+        var li = previewerBody.getElementsByTagName('li');
+        for (var i = 0; i < li.length; i++)
+            li[i].className = 'list-style-type: decimal';
+	
     });
 
 }
