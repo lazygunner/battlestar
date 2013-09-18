@@ -10,13 +10,14 @@
     {% endif %}
   </h2>
 
-  <form action="?{{ request.query_string }}" method="post" class="well">
+  <form id="form" action="?{{ request.query_string }}" method="post" class="well">
     {{ forms.render(form) }}
     <div style="padding-top:10px">
-      <input type="submit" class="btn btn-primary" value="save">
+    <div id="epiceditor"></div>
+    <div style="padding-top:10px">
+      <input type="button" class="btn btn-primary" onclick="formSubmit()" value="save">
       <a href="{{ url_for("bridge.index") }}" class="btn btn-default">Cancel</a>
     </div>
   </form>
 
-  <div id="epiceditor"></div>
 {% endblock %}

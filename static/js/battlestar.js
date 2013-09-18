@@ -1,6 +1,15 @@
 window.onload = function(){
+    document.getElementById('body').style.display='none';
+    document.getElementById('slug').style.display='none';
+
+    var labels = document.getElementsByTagName('label');
+    for (var i=0; i < labels.length; i++)
+        if(labels[i].htmlFor != 'title')
+            labels[i].style.display='none';
+   
     var opt = {
-        basePath: '/static'
+        basePath: '/static',
+        textarea: 'body'
     }
     var editor = new EpicEditor(opt).load(function(){
         previewer = this.getElement('previewer');
@@ -38,4 +47,8 @@ window.onload = function(){
 
 }
 
-
+function formSubmit()
+{
+    document.getElementById('slug').value = document.getElementById('title').value
+    document.getElementById('form').submit();
+}
