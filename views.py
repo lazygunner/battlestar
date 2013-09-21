@@ -2,6 +2,9 @@ from flask.ext.mongoengine.wtf import model_form
 from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from models import Post, Comment
+import markdown
+from flask import Markup
+import re
 
 posts = Blueprint('posts', __name__, template_folder='templates')
 
@@ -27,6 +30,12 @@ class DetailView(MethodView):
 
     def get(self, slug):
         context = self.get_context(slug)
+        md = markdown.markdown(context['post'].body) #change <p> in markdown before <code> to <pre>
+        p = re.compile('<p>')
+        md = p.sub('<pre>', md, 1)
+        p = re.compile('</p>')
+        md = p.sub('</pre>', md, 1)
+        context['post'].body = Markup(md)
         return render_template('posts/detail.html', **context)
     
     def post(self, slug):

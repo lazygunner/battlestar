@@ -8,9 +8,9 @@
         {% endblock %}
 
         {% block content %}
-          {% filter markdown %}
+          <div class="md_content" style="padding-top:0px">
           {{ post.body }}
-          {% endfilter %}
+          </div>
             <p>{{ post.created_at.strftime('%H:%M %Y-%m-%d') }}</p>
               <hr>
                 <h2>Comments</h2>
@@ -29,5 +29,38 @@
                 <input type="submit" class="btn btn-primary" value="comment">
                   </div>
                   </form>
+                  
+        <script>
+        window.onload = function(){
+		        previewer = document.getElementsByClassName('md_content')[0];
+		/*
+		            // Prettify JS
+		        var scriptTag = previewer.createElement('script');
+		        scriptTag.src = '/static/js/google-code-prettify/prettify.js';
+		
+		            // Prettify CSS
+		        var cssTag = previewer.createElement('link');
+		        cssTag.rel = 'stylesheet';
+		        cssTag.type = 'text/css';
+		        cssTag.href = '/static/js/google-code-prettify/prettify.css';
+		           // Add JS / CSS
+		        previewer.body.appendChild(scriptTag);
+		        previewer.head.appendChild(cssTag);	
+		         */
+		                // Add necessary classes to <code> elements
+		        
+		        var codeBlocks = document.getElementsByTagName('code');
+		
+		        for (var i = 0; i < codeBlocks.length; i++)
+		            codeBlocks[i].className += ' prettyprint linenums';
+		        var body = document.getElementsByTagName('body');
+		        prettyPrint(null, previewer);	
+		        
+		        var li = document.getElementsByTagName('li');
+		        for (var i = 0; i < li.length; i++)
+		            li[i].className = 'list-style-type: decimal';
+		           
+       }
+       </script>
                   
                                                 {% endblock %}
