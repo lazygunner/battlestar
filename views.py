@@ -11,7 +11,7 @@ posts = Blueprint('posts', __name__, template_folder='templates')
 class ListView(MethodView):
 
     def get(self):
-        posts = Post.objects.all()
+        posts = Post.objects.filter(show=True)
         return render_template('posts/list.html', posts=posts)
 
 class DetailView(MethodView):
@@ -30,18 +30,7 @@ class DetailView(MethodView):
 
     def get(self, slug):
         context = self.get_context(slug)
-        
-        #md = markdown.markdown(context['post'].body) #change <p> in markdown before <code> to <pre>
-        #p = re.compile('<p><code>')
-        #md = p.sub('<pre><code>', md, 1)
-        #p = re.compile('</code></p>')
-        #md = p.sub('</code></pre>', md, 1)
-        #context['post'].body = Markup(md)
         md = markdown2.markdown(context['post'].body)
-        #p = re.compile('<code>')
-        #md = p.sub('<pre><code>', md, 1)
-        #p = re.compile('</code>')
-        #md = p.sub('</code></pre>', md, 1)
         context['post'].body = Markup(md)
         return render_template('posts/detail.html', **context)
     
@@ -59,6 +48,8 @@ class DetailView(MethodView):
 
             return redirect(url_for('posts.detail', slug=slug))
         return render_template('posts/detail.html', **context)
+        
+	
 
 posts.add_url_rule('/', view_func=ListView.as_view('list'))
 posts.add_url_rule('/<slug>/', view_func=DetailView.as_view('detail'))

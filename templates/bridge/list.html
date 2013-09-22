@@ -5,14 +5,16 @@
     <thead>
         <th>Title</th>
         <th>Created</th>
-        <th>Actions</th>
+        <th>Acrions</th>
     </thead>
     <tbody>
     {% for post in posts %}
         <tr>
             <th><a href="{{ url_for('bridge.edit', slug=post.slug) }}">{{ post.title }}</a></th>
             <td>{{ post.created_at.strftime('%Y-%m-%d') }}</td>
-            <td><a href="{{ url_for('bridge.edit', slug=post.slug )}}" class="btn btn-primary btn-xs">Edit</a></td>
+            <td><a href="{{ url_for('bridge.edit', slug=post.slug )}}" class="btn btn-primary btn-xs">Edit</a>
+            	<a href="{{ url_for('bridge.delete', slug=post.slug )}}" class="btn btn-primary btn-xs">Delete</a></td>
+
         </tr>
     {% endfor %}
     </tbody>

@@ -7,6 +7,7 @@ class Post(db.Document):
     title = db.StringField(max_length=255, required=True)
     slug = db.StringField(max_length=255, required=True)
     body = db.StringField(required=True)
+    show = db.BooleanField(default=True)
     comments = db.ListField(db.EmbeddedDocumentField('Comment'))
 
     def get_absolute_url(self):

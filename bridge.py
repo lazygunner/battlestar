@@ -1,3 +1,4 @@
+#coding=utf-8
 from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 
@@ -20,7 +21,7 @@ class Detail(MethodView):
     decorateors = [requires_auth]
 
     def get_context(self, slug=None):
-        form_cls = model_form(Post, exclude=('created_at', 'comments'))
+        form_cls = model_form(Post, exclude=('created_at', 'comments', 'show'))
 
         if slug:
             post = Post.objects.get_or_404(slug=slug)
@@ -56,6 +57,28 @@ class Detail(MethodView):
             return redirect(url_for('bridge.index'))
         return render_template('bridge/detail.html', **context)
 
+
+
+class Delete(MethodView):
+    #decorateors = [requires_auth]
+              
+	def get(self, slug):
+		post = Post.objects.get_or_404(slug=slug)
+
+		context = {
+            "post": post,
+            "create": slug is None
+        }
+		if post:
+			post.show = False
+			post.save()
+			return redirect(url_for('bridge.index'))
+		else:
+			render_template('bridge/detail.html', **context)
+		
+
+
 bridge.add_url_rule('/bridge/', view_func=List.as_view('index'))
 bridge.add_url_rule('/bridge/create/', defaults={'slug': None}, view_func=Detail.as_view('create'))
 bridge.add_url_rule('/bridge/<slug>/', view_func=Detail.as_view('edit'))
+bridge.add_url_rule('/bridge/delete/<slug>/', view_func=Delete.as_view('delete'))
