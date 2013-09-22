@@ -30,12 +30,13 @@ class DetailView(MethodView):
 
     def get(self, slug):
         context = self.get_context(slug)
-        md = markdown.markdown(context['post'].body) #change <p> in markdown before <code> to <pre>
-        p = re.compile('<p>')
-        md = p.sub('<pre>', md, 1)
-        p = re.compile('</p>')
-        md = p.sub('</pre>', md, 1)
-        context['post'].body = Markup(md)
+        
+        #md = markdown.markdown(context['post'].body) #change <p> in markdown before <code> to <pre>
+        #p = re.compile('<p><code>')
+        #md = p.sub('<pre><code>', md, 1)
+        #p = re.compile('</code></p>')
+        #md = p.sub('</code></pre>', md, 1)
+        #context['post'].body = Markup(md)
         return render_template('posts/detail.html', **context)
     
     def post(self, slug):
