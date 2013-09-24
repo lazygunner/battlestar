@@ -29,10 +29,24 @@ class DetailView(MethodView):
         }
         return context
 
+    def get_real_link(self, body):
+        p = re.compile('!\[.*?\]\((http://pan.*?)\)')
+        urls = p.findall(body)
+        for url in urls:
+            link = getDownloadLink(url)
+            if link:
+                real_link = link['link']
+                n = re.compile(link)
+                body = n.sub(real_link, body, 1)
+        return body
+
+ 
     def get(self, slug):
         context = self.get_context(slug)
         md = markdown2.markdown(context['post'].body)
-        context['post'].body = Markup(md)
+        md_body = Markup(md)
+        
+        context['post'].body = self.get_real_link(md_body)
         return render_template('posts/detail.html', **context)
     
     def post(self, slug):
@@ -44,13 +58,6 @@ class DetailView(MethodView):
             form.populate_obj(comment)
 
             post = context.get('post')
-            p = re.compile('![.*?]\((http://pan.*?)\)')
-            url = p.match(post.body)
-            link = getDownloadLink(url)
-            if link:
-                real_link = link['link']
-                print real_link
-
             post.comments.append(comment)
             post.save()
 

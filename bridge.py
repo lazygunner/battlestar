@@ -6,6 +6,8 @@ from flask.ext.mongoengine.wtf import model_form
 
 from auth import requires_auth
 from models import Post, Comment
+from baidu_pic import getDownloadLink
+import re
 
 bridge = Blueprint('bridge', __name__, template_folder='templates')
 
@@ -51,6 +53,8 @@ class Detail(MethodView):
 
         if form.validate():
             post = context.get('post')
+
+
             form.populate_obj(post)
             post.save()
 
