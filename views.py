@@ -2,6 +2,7 @@ from flask.ext.mongoengine.wtf import model_form
 from flask import Blueprint, request, redirect, render_template, url_for
 from flask.views import MethodView
 from models import Post, Comment
+from baidu_pic import getDownloadLink
 import markdown2
 from flask import Markup
 import re
@@ -43,6 +44,13 @@ class DetailView(MethodView):
             form.populate_obj(comment)
 
             post = context.get('post')
+            p = re.compile('![.*?]\((http://pan.*?)\)')
+            url = p.match(post.body)
+            link = getDownloadLink(url)
+            if link:
+                real_link = link['link']
+                print real_link
+
             post.comments.append(comment)
             post.save()
 
