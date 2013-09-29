@@ -22,11 +22,24 @@
          </div>
          {%- endblock -%}
 
-         <div class="container">
+         <div class="container" style="float:left;width:80%">
             <div class="content" style="padding-top:0px">
                 {% block page_header %}{% endblock %}
                 {% block content %}{% endblock %}
             </div>
+         </div>
+         <div>
+            <script type="text/javascript"><!--
+            google_ad_client = "ca-pub-4042072006763316";
+            /* ad1 */
+            google_ad_slot = "9516173985";
+            google_ad_width = 300;
+            google_ad_height = 250;
+            //-->
+         </script>
+         <script type="text/javascript"
+         src="pagead2.googlesyndication.com/pagead/show_ads.js">
+         </script>
          </div>
          {% block js_footer %}
          <script src="{{ url_for('static', filename='js/epiceditor.min.js') }}"></script>         
