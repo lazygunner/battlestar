@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-    {% for post in posts %}
+    {% for post in posts.items %}
         <h2><a href="{{url_for('posts.detail', slug=post.slug)}}">{{ post.title }}</a></h2>
         <p>{{ post.body|truncate(100) }}</p>
         <p>
@@ -11,4 +11,10 @@
           {% endwith%}
         </p>
     {% endfor %}
+         <div style="position: absolute;bottom: 0;padding-left: 20%;">
+         {% from "render_pagination.html" import render_pagination %}
+         {{ render_pagination(posts, 'posts.list') }}
+         
+         </div>
+
 {% endblock %}

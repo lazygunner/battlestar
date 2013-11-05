@@ -8,11 +8,17 @@ import re
 
 posts = Blueprint('posts', __name__, template_folder='templates')
 
-class ListView(MethodView):
+class DefaultView(MethodView):
 
     def get(self):
-        posts = Post.objects.filter(show=True)
-        return render_template('posts/list.html', posts=posts)
+        return redirect('/1')
+
+class ListView(MethodView):
+
+    def get(self, page_id=1):
+        #posts = Post.objects.filter(show=True)
+        paginated_posts = Post.objects(show=True).paginate(int(page_id), per_page=5)
+        return render_template('posts/list.html', posts=paginated_posts)
 
 class DetailView(MethodView):
 
@@ -51,5 +57,6 @@ class DetailView(MethodView):
         
 	
 
-posts.add_url_rule('/', view_func=ListView.as_view('list'))
+posts.add_url_rule('/<page_id>', view_func=ListView.as_view('list'))
+posts.add_url_rule('/', view_func=DefaultView.as_view('default'))
 posts.add_url_rule('/<slug>/', view_func=DetailView.as_view('detail'))
