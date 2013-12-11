@@ -7,7 +7,7 @@
         <p>
           {{ post.created_at.strftime('%H:%H %Y-%m-%d') }} |
           {% with total = post.comments|length %}
-            {{ total }} comment {%- if total > 1 %}s{%- endif-%}
+            {{ total }} 条评论 
           {% endwith%}
         </p>
     {% endfor %}
