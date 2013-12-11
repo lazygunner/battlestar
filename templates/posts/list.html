@@ -4,7 +4,7 @@
     {% for post in posts.items %}
         <h2><a href="{{url_for('posts.detail', slug=post.slug)}}">{{ post.title }}</a></h2>
         <p>{{ post.body|truncate(100) }}</p>
-        <p>
+        <p style="margin-bottom:10px">
           {{ post.created_at.strftime('%H:%M %Y-%m-%d') }} |
           {% with total = post.comments|length %}
             {{ total }} 条评论 
