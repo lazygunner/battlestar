@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <div class="posts" style="display:inline-block;width:600px">
     {% for post in posts.items %}
         <h2><a href="{{url_for('posts.detail', slug=post.slug)}}">{{ post.title }}</a></h2>
         <p>{{ post.body|truncate(100) }}</p>
         <p style="margin-bottom:10px">
-          {{ post.created_at.strftime('%H:%M %Y-%m-%d') }} |
-          {% with total = post.comments|length %}
-            {{ total }} 条评论 
-          {% endwith%}
+          {{ post.created_at.strftime('%H:%M %Y-%m-%d') }} 
         </p>
     {% endfor %}
+        </div>
+        <div class="wb" style="float:right;display:inline-block">
+        <iframe width="100%" height="550" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=1&ptype=1&speed=0&skin=1&isTitle=1&noborder=1&isWeibo=1&isFans=0&uid=1827662575&verifier=72eb4b68&dpc=1"></iframe>
+        </div>
          <div style="bottom: 0;padding-left: 20%;">
          {% from "render_pagination.html" import render_pagination %}
          {{ render_pagination(posts, 'posts.list') }}
          
          </div>
-
 {% endblock %}

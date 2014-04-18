@@ -2,10 +2,11 @@
 <html lang="en" xmlns:wb="http://open.weibo.com/wb">
     <head>
         <meta charset="utf-8">
+        <meta property="wb:webmaster" content="9a888e1213f5e2b2" />
         <title>LazyGunner's BattleStar</title>
         <link href="http://bootswatch.com/simplex/bootstrap.min.css" rel="stylesheet">
         <link href="{{ url_for('static', filename='js/google-code-prettify/prettify.css')}}" rel="stylesheet">
-        <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=2516902990" type="text/javascript" charset="utf-8"></script>
+        <script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=1848475343" type="text/javascript" charset="utf-8"></script>
         <style>.content {padding-top: 80px;}</style>
     </head>
 
@@ -27,8 +28,8 @@
          </div>
          {%- endblock -%}
 
-         <div class="container" style="float:left;width:70%">
-            <div class="content" style="padding-top:0px;margin-left:5%;width:600px">
+         <div class="container" style="float:left">
+            <div class="content" style="padding-top:0px;margin-left:5%;display:inline">
                 {% block page_header %}{% endblock %}
                 {% block content %}{% endblock %}
             </div>
