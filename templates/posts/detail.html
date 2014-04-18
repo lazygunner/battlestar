@@ -13,6 +13,7 @@
           </div>
             <p>{{ post.created_at.strftime('%H:%M %Y-%m-%d') }}</p>
               <hr>
+              <!--
                 <h2>评论</h2>
                   {% if post.comments %}
                       {% for comment in post.comments %}
@@ -29,7 +30,8 @@
                 <input type="submit" class="btn btn-primary" value="comment">
                   </div>
                   </form>
-                         
+                  -->
+                  <wb:comments url="auto" fontsize="14" width="auto" appkey="2516902990" ></wb:comments>
         <script>
         window.onload = function(){
 		        previewer = document.getElementsByClassName('md_content')[0];

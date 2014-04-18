@@ -11,7 +11,7 @@ posts = Blueprint('posts', __name__, template_folder='templates')
 class DefaultView(MethodView):
 
     def get(self):
-        return redirect('/1')
+        return redirect('/page/1')
 
 class ListView(MethodView):
 
@@ -57,6 +57,6 @@ class DetailView(MethodView):
         
 	
 
-posts.add_url_rule('/<page_id>', view_func=ListView.as_view('list'))
+posts.add_url_rule('/page/<page_id>', view_func=ListView.as_view('list'))
 posts.add_url_rule('/', view_func=DefaultView.as_view('default'))
 posts.add_url_rule('/<slug>/', view_func=DetailView.as_view('detail'))
